@@ -1,22 +1,23 @@
 import Estado
+import ConjuntoEstados
 import Simbolo
 
-class TransicaoD:
+class TransicaoN:
 
     def __init__(self, origem='', destino='', simbolo=''):
-        """Construtor da TransicaoD
+        """Construtor da TransicaoN
 
         Args:
-            origem (Estado): Estado origem da TransicaoD
-            destino (Estado): Estado destino da TransicaoD
-            simbolo (Simbolo): Simbolo da TransicaoD 
+            origem (Estado): Estado origem da TransicaoN
+            destino (ConjuntoEstados): Conjunto de Estados destinos da TransicaoN
+            simbolo (Simbolo): Simbolo da TransicaoN 
         """
         self.origem = Estado()
         self.destino = Estado()
         self.simbolo = Simbolo()
         
     def getDestino(self):
-        """Obtem o Estado destino da TransicaoD
+        """Obtem o Estado destino da TransicaoN
 
         Returns:
             destino (Estado): Estado destino da transicao
@@ -24,15 +25,15 @@ class TransicaoD:
         return self.destino.clonar()
 
     def setDestino(self, destino):
-        """Ajusta o Estado destino da TransicaoD
+        """Ajusta o Estado destino da TransicaoN
 
         Args:
-            destino (Estado): Novo Estado de destino da Transicao    
+            destino (ConjuntoEstados): Novo Conjunto de Estados destinos da Transicao    
         """
         self.destino = destino.clonar()
 
     def getOrigem(self):
-        """Obtem o Estado origem da TransicaoD
+        """Obtem o Estado origem da TransicaoN
 
         Returns:
             origem (Estado): Estado origem da transicao
@@ -42,7 +43,7 @@ class TransicaoD:
         return None
 
     def setOrigem(self, origem):
-        """Ajusta o Estado origem da TransicaoD
+        """Ajusta o Estado origem da TransicaoN
 
         Args:
             origem (Estado): Novo Estado de origem da Transicao    
@@ -50,7 +51,7 @@ class TransicaoD:
         self.origem = origem.clonar()
     
     def getSimbolo(self):
-        """Obtem o simbolo da TransicaoD
+        """Obtem o simbolo da TransicaoN
 
         Returns:
             simbolo (Simbolo): Simbolo da transicao
@@ -58,7 +59,7 @@ class TransicaoD:
         return self.simbolo.clonar()
 
     def setSimbolo(self, simbolo):
-        """Ajusta o Simbolo da TransicaoD
+        """Ajusta o Simbolo da TransicaoN
 
         Args:
             simbolo (Simbolo): Novo Simbolo da Transicao    
@@ -66,19 +67,19 @@ class TransicaoD:
         self.simbolo = simbolo.clonar()
 
     def clonar(self):
-        """Cria e retorna uma copia do objeto TransicaoD
+        """Cria e retorna uma copia do objeto TransicaoN
 
         Returns:
-            td (TransicaoD): clone da TransicaoD
+            tn (TransicaoN): clone da TransicaoN
         """
-        td = TransicaoD(self.origem, self.destino, self.simbolo)
-        return td
+        tn = TransicaoN(self.origem, self.destino, self.simbolo)
+        return tn
 
     def igual(self, transicao):
-        """Verifica se a TransicaoD passada por parametro é igual a propria TransicaoD
+        """Verifica se a TransicaoN passada por parametro é igual a propria TransicaoN
         
         Args:
-            transicao (TransicaoD): TransicaoD a ser comparada
+            transicao (TransicaoN): TransicaoN a ser comparada
 
         Returns:
             igual (bool): flag para igualdade das transicoes
