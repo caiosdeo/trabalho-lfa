@@ -97,7 +97,7 @@ class ConjuntoEstados:
         for key in ce.getElementos.keys():
             e = ce.getElementos[key]
             if not novoConjunto.pertence(e):
-                novoConjunto.inclui(e)
+                novoConjunto.inclui(e.clonar())
         return novoConjunto
 
     """Realiza a interseção entre dois conjuntos de estados
@@ -114,7 +114,7 @@ class ConjuntoEstados:
         for key in ce.getElementos.keys():
             e = ce.getElementos[key]
             if self.pertence(e):
-                novoConjunto.inclui(e)
+                novoConjunto.inclui(e.clonar())
         return novoConjunto
 
     """Verifica se dois conjuntos são iguais
