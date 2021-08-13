@@ -172,9 +172,6 @@ class ConjuntoEstados:
 
     Args:
         self (ConjuntoEstados): A própria classe
-
-    Returns:
-        str: string contendo os nomes dos elementos do conjunto
     """
     def removerElemento(self,e):
         if e is not None:
