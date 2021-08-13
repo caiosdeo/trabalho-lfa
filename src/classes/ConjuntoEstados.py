@@ -115,6 +115,7 @@ class ConjuntoEstados:
             e = ce.getElementos[key]
             if self.pertence(e):
                 novoConjunto.inclui(e)
+        return novoConjunto
 
     """Verifica se dois conjuntos são iguais
 
