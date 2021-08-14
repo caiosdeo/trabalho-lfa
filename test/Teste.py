@@ -15,7 +15,7 @@ class Teste:
         self.inicializar()
         self.testarInclusao()
         self.testarIgualdade()
-        # self.testeUniaoIntersecao()
+        self.testeUniaoIntersecao()
 
     def inicializar(self):
         self.e1 = Estado("e1")
@@ -77,7 +77,7 @@ class Teste:
         self.cce2.inclui(self.ce)
         
         print("Teste inclusao: ")
-        print("ce:"+ self.ce +"\nce2:"+ self.ce2 +"\ncsi:"+ self.csi +"\nct:"+ self.ct +"\ncce:"+ self.cce)
+        print(f"ce: {self.ce} \nce2: {self.ce2} \ncsi: {self.csi} \nct: {self.ct} \ncce: {self.cce}")
 
     def testeUniaoIntersecao(self):
 
@@ -87,28 +87,28 @@ class Teste:
         cceTeste = ConjuntoConjuntoEstados()
 
         ceTeste = self.ce.uniao(self.ce2)		
-        print("ceUce2:"+ ceTeste)
+        print(f"ceUce2: {ceTeste}")
         
         ceTeste = self.ce.intersecao(self.ce2)		
-        print("ceIce2:"+ ceTeste)
+        print(f"ceIce2: {ceTeste}")
         
         csTeste = self.csi.uniao(self.csi2)		
-        print("csiUcsi2:"+ csTeste)
+        print(f"csiUcsi2: {csTeste}")
         
         csTeste = self.csi.intersecao(self.csi2)		
-        print("csiIcsi2:"+ csTeste)
+        print(f"csiIcsi2: {csTeste}")
         
         ctTeste = self.ct.uniao(self.ct2)		
-        print("ctUct2:"+ ctTeste)
+        print(f"ctUct2: {ctTeste}")
         
         ctTeste = self.ct.intersecao(self.ct2)		
-        print("ctIct2:"+ ctTeste)
+        print(f"ctIct2: {ctTeste}")
         
         cceTeste = self.cce.uniao(self.cce2)		
-        print("cceUcce2:"+ cceTeste)
+        print(f"cceUcce2: {cceTeste}")
         
         cceTeste = self.cce.intersecao(self.cce2)		
-        print("cceIcce2:"+ cceTeste)
+        print(f"cceIcce2: {cceTeste}")
 
     def testarIgualdade(self):
 
