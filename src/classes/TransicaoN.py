@@ -93,4 +93,4 @@ class TransicaoN:
         return False
 
     def __str__(self):
-        return "(" + self.origem + ", " + self.destino + ", " + self.simbolo + ")"
+        return f"( {self.origem}, {self.destino}, {self.simbolo})"

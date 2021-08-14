@@ -113,7 +113,7 @@ class AFD:
         return afd
 
     def __str__(self):
-        return "(" + self.simbolos + ", " + self.estados + ", " + self.funcaoPrograma + ", " + self.estadoInicial + ", " + self.estadosFinais + ")"
+        return f"({self.simbolos}, {self.estados}, {self.funcaoPrograma}, {self.estadoInicial}, {self.estadosFinais})"
 
     def limpa(self):
         """Limpa as estruturas de dados do AFD""" 
