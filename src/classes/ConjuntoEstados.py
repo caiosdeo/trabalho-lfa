@@ -110,7 +110,7 @@ class ConjuntoEstados:
     Returns:
         ConjuntoEstados: ConjuntoEstados resultante da interseção
     """
-    def interseção(self,ce):
+    def intersecao(self,ce):
         novoConjunto = ConjuntoEstados()
         ceElementos = ce.getElementos()
         for key in ceElementos.keys():
@@ -149,7 +149,7 @@ class ConjuntoEstados:
     Returns:
         str: string contendo os nomes dos elementos do conjunto
     """
-    def toString(self):
+    def __str__(self):
         return '{' + f"{','.join(self.elementos.keys())}" + '}'
 
     """Esse método tem como função retornar os elementos de um ConjuntoEstados

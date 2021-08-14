@@ -93,7 +93,7 @@ class ConjuntoSimbolos:
     Returns:
         ConjuntoSimbolos: ConjuntoSimbolos resultante da interseção
     """
-    def interseção(self,cs):
+    def intersecao(self,cs):
         novoConjunto = ConjuntoSimbolos()
         csElementos = cs.getElementos()
         for key in csElementos.keys():
@@ -132,7 +132,7 @@ class ConjuntoSimbolos:
     Returns:
         str: string contendo os nomes dos elementos do conjunto
     """
-    def toString(self):
+    def __str__(self):
         return '{' + f"{','.join(self.elementos.keys())}" + '}'
 
     """Esse método tem como função retornar os elementos de um ConjuntoSimbolos

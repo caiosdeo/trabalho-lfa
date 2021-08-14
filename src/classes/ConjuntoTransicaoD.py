@@ -28,7 +28,7 @@ class ConjuntoTransicaoD:
         elemento (TransicaoN): TransicaoN a ser inserida no ConjuntoTransicaoD
     """
     def inclui(self,elemento):
-        self.elementos[elemento.toString()] = elemento.clonar()
+        self.elementos[elemento] = elemento.clonar()
 
     """Verfica se uma TransicaoN pertence a um dado ConjuntoTransicaoD
 
@@ -41,7 +41,7 @@ class ConjuntoTransicaoD:
     """
     def pertence(self,elemento):
         if elemento is not None:
-            return True if elemento.toString() in self.elementos.keys() else False
+            return True if elemento in self.elementos.keys() else False
         return False
 
     """Realiza a união entre dois ConjuntoTransicaoD
@@ -71,7 +71,7 @@ class ConjuntoTransicaoD:
     Returns:
         ConjuntoTransicaoD: ConjuntoTransicaoD resultante da interseção
     """
-    def interseção(self,ctn):
+    def intersecao(self,ctn):
         novoConjunto = ConjuntoTransicaoD()
         ctnElementos = ctn.getElementos()
         for key in ctnElementos.keys():
@@ -124,7 +124,7 @@ class ConjuntoTransicaoD:
     Returns:
         str: string contendo os nomes dos elementos do conjunto
     """
-    def toString(self):
+    def __str__(self):
         return '{' + f"{','.join(self.elementos.keys())}" + '}'
 
     """Esse método tem como função retornar os elementos de um ConjuntoTransicaoD
@@ -145,5 +145,5 @@ class ConjuntoTransicaoD:
     """
     def removerElemento(self,e):
         if e is not None:
-            del self.elementos[e.toString()]
+            del self.elementos[e]
 	

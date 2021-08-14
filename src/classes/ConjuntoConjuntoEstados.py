@@ -37,7 +37,7 @@ class ConjuntoConjuntoEstados:
         elemento (ConjuntoEstado): ConjuntoEstado a ser inserido no ConjuntoConjuntoEstados
     """
     def inclui(self,elemento):
-        self.elementos[elemento.toString()] = elemento.clonar()
+        self.elementos[elemento] = elemento.clonar()
 
     """Verfica se um ConjuntoEstado pertence a um dado ConjuntoConjuntoEstados
 
@@ -50,7 +50,7 @@ class ConjuntoConjuntoEstados:
     """
     def pertence(self,elemento):
         if elemento is not None:
-            return True if elemento.toString() in self.elementos.keys() else False
+            return True if elemento in self.elementos.keys() else False
         return False
 
     """Realiza a união entre dois ConjuntoConjuntoEstados
@@ -80,7 +80,7 @@ class ConjuntoConjuntoEstados:
     Returns:
         ConjuntoConjuntoEstados: ConjuntoConjuntoEstados resultante da interseção
     """
-    def interseção(self,cce):
+    def intersecao(self,cce):
         novoConjunto = ConjuntoConjuntoEstados()
         cceElementos = cce.getElementos()
         for key in cceElementos.keys():
@@ -148,7 +148,7 @@ class ConjuntoConjuntoEstados:
     Returns:
         str: string contendo os nomes dos elementos do conjunto
     """
-    def toString(self):
+    def __str__(self):
         return '{' + f"{','.join(self.elementos.keys())}" + '}'
 
     """Esse método tem como função retornar os elementos de um ConjuntoEstados
@@ -169,5 +169,5 @@ class ConjuntoConjuntoEstados:
     """
     def removerElemento(self,e):
         if e is not None:
-            del self.elementos[e.toString()]
+            del self.elementos[e]
 	
