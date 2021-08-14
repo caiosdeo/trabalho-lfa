@@ -1,5 +1,5 @@
-import Estado
-import Simbolo
+from src.classes.Simbolo import Simbolo
+from src.classes.Estado import Estado
 
 class TransicaoD:
 

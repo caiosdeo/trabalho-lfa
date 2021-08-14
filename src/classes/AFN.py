@@ -1,11 +1,22 @@
-import Simbolo
-import Estado
+# Importando outras classes
+from src.classes.Simbolo import Simbolo
+from src.classes.Estado import Estado
+from src.classes.TransicaoD import TransicaoD
+from src.classes.TransicaoN import TransicaoN
+from src.classes.ConjuntoEstados import ConjuntoEstados
+from src.classes.ConjuntoTransicaoD import ConjuntoTransicaoD
+from src.classes.ConjuntoTransicaoN import ConjuntoTransicaoN
+from src.classes.ConjuntoSimbolo import ConjuntoSimbolos
+from src.classes.ConjuntoConjuntoEstados import ConjuntoConjuntoEstados
+from src.classes.AFD import AFD
+
+# Biblioteca para trabalhar com XML
 import xml.etree.ElementTree as ET
 
 class AFN:
     
     def __init__(self, simbolos, estados, funcaoPrograma, estadoInicial, estadosFinais):
-        """Construtor da TransicaoD
+        """Construtor do AFN
 
         Args:
             simbolos (ConjuntoSimbolos): ConjuntoSimbolo que representa o alfabeto do automato finito nao-deterministico 
@@ -232,7 +243,7 @@ class AFN:
             # Remove o elemento do Conjunto de analisaveis pois este sera analizado
             cceAtual.removerElemento(conjuntoEstadosAtual)
             # Renova o parametro temporario
-            ceTemp = ConjuntoElementos()
+            ceTemp = ConjuntoEstados()
             # Parametro para verificar se o estado vai pertencer ao conjunto de estados finais
             estadoFinal = False
 
@@ -240,7 +251,7 @@ class AFN:
             for itSi in novoConjuntoSimbolos:
 
                 # Iteracao sobre os Estados que formam o estado atual
-                ceTemp = ConjuntoElementos()
+                ceTemp = ConjuntoEstados()
 
                 for itCe in conjuntoEstadosAtual:
                     # Novo estado sera a uniao de todos o retorno da funcao programa para um determinado simbolo

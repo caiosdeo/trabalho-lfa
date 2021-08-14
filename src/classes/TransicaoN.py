@@ -1,7 +1,7 @@
-import Estado
-import ConjuntoEstados
-import Simbolo
-
+# Importando outras classes
+from src.classes.Simbolo import Simbolo
+from src.classes.Estado import Estado
+from src.classes.ConjuntoEstados import ConjuntoEstados
 class TransicaoN:
 
     def __init__(self):

@@ -1,10 +1,18 @@
-import Simbolo
+# Importando outras classes
+from src.classes.Simbolo import Simbolo
+from src.classes.Estado import Estado
+from src.classes.TransicaoD import TransicaoD
+from src.classes.ConjuntoEstados import ConjuntoEstados
+from src.classes.ConjuntoTransicaoD import ConjuntoTransicaoD
+from src.classes.ConjuntoSimbolo import ConjuntoSimbolos
+
+# Biblioteca para trabalhar com XML
 import xml.etree.ElementTree as ET
 
 class AFD:
     
     def __init__(self, simbolos, estados, funcaoPrograma, estadoInicial, estadosFinais):
-        """Construtor da TransicaoD
+        """Construtor da AFD
 
         Args:
             simbolos (ConjuntoSimbolos): ConjuntoSimbolo que representa o alfabeto do automato finito deterministico 
