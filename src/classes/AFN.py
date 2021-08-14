@@ -5,8 +5,6 @@ from src.classes.TransicaoD import TransicaoD
 from src.classes.TransicaoN import TransicaoN
 from src.classes.ConjuntoEstados import ConjuntoEstados
 from src.classes.ConjuntoTransicaoD import ConjuntoTransicaoD
-from src.classes.ConjuntoTransicaoN import ConjuntoTransicaoN
-from src.classes.ConjuntoSimbolo import ConjuntoSimbolos
 from src.classes.ConjuntoConjuntoEstados import ConjuntoConjuntoEstados
 from src.classes.AFD import AFD
 
