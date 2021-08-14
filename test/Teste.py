@@ -55,26 +55,26 @@ class Teste:
         self.cce2 = ConjuntoConjuntoEstados()
 
     def testarInclusao(self):
-        self.ce.inclui(e1)
-        self.ce.inclui(e2)
-        self.ce.inclui(e3)			
+        self.ce.inclui(self.e1)
+        self.ce.inclui(self.e2)
+        self.ce.inclui(self.e3)			
         
-        self.ce2.inclui(e1)
-        self.ce2.inclui(e2)
-        self.ce2.inclui(e3)
-        self.ce2.inclui(e4)
+        self.ce2.inclui(self.e1)
+        self.ce2.inclui(self.e2)
+        self.ce2.inclui(self.e3)
+        self.ce2.inclui(self.e4)
         
-        self.csi.inclui(s1)
-        self.csi.inclui(s2)
-        self.csi2.inclui(s3)
+        self.csi.inclui(self.s1)
+        self.csi.inclui(self.s2)
+        self.csi2.inclui(self.s3)
         
-        self.ct.inclui(t1)
-        self.ct.inclui(t3)
-        self.ct2.inclui(t2)
+        self.ct.inclui(self.t1)
+        self.ct.inclui(self.t3)
+        self.ct2.inclui(self.t2)
         
-        self.cce.inclui(ce)
-        self.cce.inclui(ce2)
-        self.cce2.inclui(ce)
+        self.cce.inclui(self.ce)
+        self.cce.inclui(self.ce2)
+        self.cce2.inclui(self.ce)
         
         print("Teste inclusao: ")
         print("ce:"+ self.ce +"\nce2:"+ self.ce2 +"\ncsi:"+ self.csi +"\nct:"+ self.ct +"\ncce:"+ self.cce)
