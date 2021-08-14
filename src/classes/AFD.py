@@ -1,10 +1,6 @@
 # Importando outras classes
 from src.classes.Simbolo import Simbolo
-from src.classes.Estado import Estado
 from src.classes.TransicaoD import TransicaoD
-from src.classes.ConjuntoEstados import ConjuntoEstados
-from src.classes.ConjuntoTransicaoD import ConjuntoTransicaoD
-from src.classes.ConjuntoSimbolo import ConjuntoSimbolos
 
 # Biblioteca para trabalhar com XML
 import xml.etree.ElementTree as ET
@@ -206,7 +202,7 @@ class AFD:
         while i < len(palavra):
 
             simbolo = Simbolo(palavra[i])
-            estadoAtual = p(estadoAtual, simbolo)
+            estadoAtual = self.p(estadoAtual, simbolo)
             if estadoAtual == None:
                 return None
             i += 1
