@@ -1,0 +1,137 @@
+# Importando classes
+from src.classes.Simbolo import Simbolo
+from src.classes.Estado import Estado
+from src.classes.TransicaoD import TransicaoD
+from src.classes.TransicaoN import TransicaoN
+from src.classes.ConjuntoEstados import ConjuntoEstados
+from src.classes.ConjuntoTransicaoD import ConjuntoTransicaoD
+from src.classes.ConjuntoTransicaoN import ConjuntoTransicaoN
+from src.classes.ConjuntoSimbolo import ConjuntoSimbolos
+from src.classes.ConjuntoConjuntoEstados import ConjuntoConjuntoEstados
+
+class Teste:
+
+    def __init__(self):
+        self.inicializar()
+        self.testarInclusao()
+        self.testarIgualdade()
+        # self.testeUniaoIntersecao()
+
+    def inicializar(self):
+        self.e1 = Estado("e1")
+        self.e2 = Estado("e2")
+        self.e3 = Estado("e3")
+        self.e4 = Estado("e4")
+            
+        self.s1 = Simbolo('a')
+        self.s2 = Simbolo('b')
+        self.s3 = Simbolo('c')
+        
+        self.t1 = TransicaoD()
+        self.t1.setOrigem(self.e1)
+        self.t1.setSimbolo(self.s1)
+        self.t1.setDestino(self.e2)
+        
+        self.t2 = TransicaoD()
+        self.t2.setOrigem(self.e3)
+        self.t2.setSimbolo(self.s1)
+        self.t2.setDestino(self.e2)
+        
+        self.t3 = TransicaoD()
+        self.t3.setOrigem(self.e2)
+        self.t3.setSimbolo(self.s2)
+        self.t3.setDestino(self.e3)
+        
+        self.ce = ConjuntoEstados()
+        self.ce2 = ConjuntoEstados()
+        
+        self.csi = ConjuntoSimbolos()
+        self.csi2 = ConjuntoSimbolos()
+        
+        self.ct = ConjuntoTransicaoD()
+        self.ct2 = ConjuntoTransicaoD()
+        
+        self.cce = ConjuntoConjuntoEstados()
+        self.cce2 = ConjuntoConjuntoEstados()
+
+    def testarInclusao(self):
+        self.ce.inclui(e1)
+        self.ce.inclui(e2)
+        self.ce.inclui(e3)			
+        
+        self.ce2.inclui(e1)
+        self.ce2.inclui(e2)
+        self.ce2.inclui(e3)
+        self.ce2.inclui(e4)
+        
+        self.csi.inclui(s1)
+        self.csi.inclui(s2)
+        self.csi2.inclui(s3)
+        
+        self.ct.inclui(t1)
+        self.ct.inclui(t3)
+        self.ct2.inclui(t2)
+        
+        self.cce.inclui(ce)
+        self.cce.inclui(ce2)
+        self.cce2.inclui(ce)
+        
+        print("Teste inclusao: ")
+        print("ce:"+ self.ce +"\nce2:"+ self.ce2 +"\ncsi:"+ self.csi +"\nct:"+ self.ct +"\ncce:"+ self.cce)
+
+    def testeUniaoIntersecao(self):
+
+        ceTeste = ConjuntoEstados()
+        csTeste = ConjuntoSimbolos()
+        ctTeste = ConjuntoTransicaoD()
+        cceTeste = ConjuntoConjuntoEstados()
+
+        ceTeste = self.ce.uniao(self.ce2)		
+        print("ceUce2:"+ ceTeste)
+        
+        ceTeste = self.ce.intersecao(self.ce2)		
+        print("ceIce2:"+ ceTeste)
+        
+        csTeste = self.csi.uniao(self.csi2)		
+        print("csiUcsi2:"+ csTeste)
+        
+        csTeste = self.csi.intersecao(self.csi2)		
+        print("csiIcsi2:"+ csTeste)
+        
+        ctTeste = self.ct.uniao(self.ct2)		
+        print("ctUct2:"+ ctTeste)
+        
+        ctTeste = self.ct.intersecao(self.ct2)		
+        print("ctIct2:"+ ctTeste)
+        
+        cceTeste = self.cce.uniao(self.cce2)		
+        print("cceUcce2:"+ cceTeste)
+        
+        cceTeste = self.cce.intersecao(self.cce2)		
+        print("cceIcce2:"+ cceTeste)
+
+    def testarIgualdade(self):
+
+        if(self.ce.igual(self.ce2)):
+            print("Conjunto de estados iguais")
+        else:
+            print("Conjunto de estados diferentes")
+        
+        if(self.csi.igual(self.csi2)):
+            print("Conjunto de simbolos iguais")
+        else:
+            print("Conjunto de simbolos diferentes")
+        
+        if(self.ct.igual(self.ct2)):
+            print("Conjunto de transicaoD iguais")
+        else:
+            print("Conjunto de transicaoD diferentes")
+        
+        if(self.cce.igual(self.cce)):
+            print("ConjuntoConjuntoEstados iguais")
+        else:
+            print("ConjuntoConjuntoEstados diferentes")
+		
+
+if __name__ == '__main__':
+    teste = Teste()
