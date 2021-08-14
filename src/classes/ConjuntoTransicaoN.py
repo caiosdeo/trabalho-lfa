@@ -106,7 +106,7 @@ class ConjuntoTransicaoN:
             e = ctn.getElementos[key]
             if not self.pertence(e):
                 return False
-        for key in self.keys():
+        for key in self.elementos.keys():
             e = self.elementos[key]
             if not ctn.pertence(e):
                 return False

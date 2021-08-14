@@ -55,8 +55,9 @@ class ConjuntoTransicaoD:
     """
     def uniao(self,ctn):
         novoConjunto = self.clonar()
-        for key in ctn.getElementos.keys():
-            e = ctn.getElementos[key]
+        ctnElementos = ctn.getElementos()
+        for key in ctnElementos.keys():
+            e = ctnElementos[key]
             if not novoConjunto.pertence(e):
                 novoConjunto.inclui(e.clonar())
         return novoConjunto
@@ -72,8 +73,9 @@ class ConjuntoTransicaoD:
     """
     def interseção(self,ctn):
         novoConjunto = ConjuntoTransicaoD()
-        for key in ctn.getElementos.keys():
-            e = ctn.getElementos[key]
+        ctnElementos = ctn.getElementos()
+        for key in ctnElementos.keys():
+            e = ctnElementos[key]
             if self.pertence(e):
                 novoConjunto.inclui(e.clonar())
         return novoConjunto
@@ -102,11 +104,12 @@ class ConjuntoTransicaoD:
         bool: True se forem iguais, False caso contrário
     """
     def igual(self,ctn):
-        for key in ctn.getElementos.keys():
-            e = ctn.getElementos[key]
+        ctnElementos = ctn.getElementos()
+        for key in ctnElementos.keys():
+            e = ctnElementos[key]
             if not self.pertence(e):
                 return False
-        for key in self.keys():
+        for key in self.elementos.keys():
             e = self.elementos[key]
             if not ctn.pertence(e):
                 return False

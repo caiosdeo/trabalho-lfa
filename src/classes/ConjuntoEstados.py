@@ -94,8 +94,9 @@ class ConjuntoEstados:
     """
     def uniao(self,ce):
         novoConjunto = self.clonar()
-        for key in ce.getElementos.keys():
-            e = ce.getElementos[key]
+        ceElementos = ce.getElementos()
+        for key in ceElementos.keys():
+            e = ceElementos[key]
             if not novoConjunto.pertence(e):
                 novoConjunto.inclui(e.clonar())
         return novoConjunto
@@ -111,8 +112,9 @@ class ConjuntoEstados:
     """
     def interseção(self,ce):
         novoConjunto = ConjuntoEstados()
-        for key in ce.getElementos.keys():
-            e = ce.getElementos[key]
+        ceElementos = ce.getElementos()
+        for key in ceElementos.keys():
+            e = ceElementos[key]
             if self.pertence(e):
                 novoConjunto.inclui(e.clonar())
         return novoConjunto
@@ -127,9 +129,14 @@ class ConjuntoEstados:
         bool: True se forem iguais, False caso contrário
     """
     def igual(self,ce):
-        for key in ce.getElementos.keys():
-            e = ce.getElementos[key]
+        ceElementos = ce.getElementos()
+        for key in ceElementos.keys():
+            e = ceElementos[key]
             if not self.pertence(e):
+                return False
+        for key in self.elementos.keys():
+            e = self.elementos[key]
+            if not ce.pertence(e):
                 return False
         return True 
 

@@ -77,8 +77,9 @@ class ConjuntoSimbolos:
     """
     def uniao(self,cs):
         novoConjunto = self.clonar()
-        for key in cs.getElementos.keys():
-            e = cs.getElementos[key]
+        csElementos = cs.getElementos()
+        for key in csElementos.keys():
+            e = csElementos[key]
             if not novoConjunto.pertence(e):
                 novoConjunto.inclui(e.clonar())
         return novoConjunto
@@ -94,8 +95,9 @@ class ConjuntoSimbolos:
     """
     def interseção(self,cs):
         novoConjunto = ConjuntoSimbolos()
-        for key in cs.getElementos.keys():
-            e = cs.getElementos[key]
+        csElementos = cs.getElementos()
+        for key in csElementos.keys():
+            e = csElementos[key]
             if self.pertence(e):
                 novoConjunto.inclui(e.clonar())
         return novoConjunto
@@ -110,9 +112,14 @@ class ConjuntoSimbolos:
         bool: True se forem iguais, False caso contrário
     """
     def igual(self,cs):
-        for key in cs.getElementos.keys():
-            e = cs.getElementos[key]
+        csElementos = cs.getElementos()
+        for key in csElementos.keys():
+            e = csElementos[key]
             if not self.pertence(e):
+                return False
+        for key in self.elementos.keys():
+            e = self.elementos[key]
+            if not cs.pertence(e):
                 return False
         return True 
 
