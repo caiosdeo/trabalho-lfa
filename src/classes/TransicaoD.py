@@ -66,7 +66,10 @@ class TransicaoD:
         Retorno:
             td (TransicaoD): clone da TransicaoD
         """
-        td = TransicaoD(self.origem, self.destino, self.simbolo)
+        td = TransicaoD()
+        td.setOrigem(self.origem)
+        td.setDestino(self.destino)
+        td.setSimbolo(self.simbolo)
         return td
 
     def igual(self, transicao):

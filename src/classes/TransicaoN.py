@@ -72,7 +72,10 @@ class TransicaoN:
         Retorno:
             tn (TransicaoN): clone da TransicaoN
         """
-        tn = TransicaoN(self.origem, self.destino, self.simbolo)
+        tn = TransicaoN()
+        tn.setOrigem(self.origem)
+        tn.setDestino(self.destino)
+        tn.setSimbolo(self.simbolo)
         return tn
 
     def igual(self, transicao):
