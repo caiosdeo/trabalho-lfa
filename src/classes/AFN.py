@@ -336,7 +336,10 @@ class AFN:
                     origem = str(elemento.get('origem'))
                     destino = str(elemento.get('destino'))
                     simbolo = str(elemento.get('simbolo'))
-                    transicao = TransicaoN(origem, destino, simbolo)
+
+                    transicao = TransicaoN()
+                    transicao.setOrigem(origem)
+                    transicao.setSimbolo(simbolo)
 
                     for it in self.funcaoPrograma:
                         if it.getOrigem().igual(transicao.getOrigem()) and it.getSimbolo().igual(transicao.getSimbolo()):

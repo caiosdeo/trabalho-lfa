@@ -4,7 +4,7 @@ import Simbolo
 
 class TransicaoN:
 
-    def __init__(self, origem='', destino='', simbolo=''):
+    def __init__(self):
         """Construtor da TransicaoN
 
         Args:

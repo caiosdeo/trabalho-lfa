@@ -246,7 +246,10 @@ class AFD:
                     origem = str(elemento.get('origem'))
                     destino = str(elemento.get('destino'))
                     simbolo = str(elemento.get('simbolo'))
-                    transicao = TransicaoD(origem, destino, simbolo)
+                    transicao = TransicaoD()
+                    transicao.setOrigem(origem)
+                    transicao.setDestino(destino)
+                    transicao.setSimbolo(simbolo)
                     self.funcaoPrograma.inclui(transicao)   
 
             if(parametro.tag == "estadosFinais"):

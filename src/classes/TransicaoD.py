@@ -3,13 +3,8 @@ import Simbolo
 
 class TransicaoD:
 
-    def __init__(self, origem='', destino='', simbolo=''):
+    def __init__(self):
         """Construtor da TransicaoD
-
-        Args:
-            origem (Estado): Estado origem da TransicaoD
-            destino (Estado): Estado destino da TransicaoD
-            simbolo (Simbolo): Simbolo da TransicaoD 
         """
         self.origem = Estado()
         self.destino = Estado()
