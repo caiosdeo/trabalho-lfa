@@ -206,7 +206,7 @@ class AFD:
         while i < len(palavra):
 
             simbolo = Simbolo(palavra[i])
-            estadoAtual = p(estadoAtual, simbolo)
+            estadoAtual = self.p(estadoAtual, simbolo)
             if estadoAtual == None:
                 return None
             i += 1

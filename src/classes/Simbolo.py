@@ -1,5 +1,4 @@
 class Simbolo:
-    VAZIA = Simbolo("E")
 
     def __init__(self, simbolo=""):
         """Construtor do Simbolo 
@@ -8,6 +7,7 @@ class Simbolo:
             simbolo (str): String a ser definida como simbolo do alfabeto 
         """
         self.simbolo = simbolo
+        self.VAZIA = Simbolo("E")
 
     def getSimbolo(self):
         """Obtem o simbolo do alfabeto

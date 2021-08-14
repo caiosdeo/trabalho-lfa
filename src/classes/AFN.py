@@ -117,7 +117,7 @@ class AFN:
         Retorno:
             afn (AFD): representa o automato finito nao-deterministico
         """
-        afn = afn(self.simbolos, self.estados, self.funcaoPrograma, self.estadoInicial, self.estadosFinais)
+        afn = self.afn(self.simbolos, self.estados, self.funcaoPrograma, self.estadoInicial, self.estadosFinais)
         return afn
 
     def __str__(self):
@@ -172,7 +172,7 @@ class AFN:
             for it in estados:
                 conjuntoNovo = conjuntoNovo.uniao(self.p(it, simbolo))
 
-            return pe(conjuntoNovo, palavra[1:''])
+            return self.pe(conjuntoNovo, palavra[1:''])
 
     def aceita(self, palavra):
         """Retorna se uma palavra e aceita ou nao pelo AFD
@@ -255,7 +255,7 @@ class AFN:
 
                 for itCe in conjuntoEstadosAtual:
                     # Novo estado sera a uniao de todos o retorno da funcao programa para um determinado simbolo
-					ceTemp = ceTemp.uniao(p(itCe, itSi));
+                    ceTemp = ceTemp.uniao(self.p(itCe, itSi))
 
                 # Verifica se a uniao esta vazia
                 if not ceTemp.vazio():
