@@ -12,7 +12,7 @@ class Simbolo:
     def getSimbolo(self):
         """Obtem o simbolo do alfabeto
 
-        Returns:
+        Retorno:
             simbolo (str): String que representa o simbolo do alfabeto
         """
         return self.simbolo
@@ -28,7 +28,7 @@ class Simbolo:
     def clonar(self):
         """Cria e retorna uma copia do objeto Simbolo
 
-        Returns:
+        Retorno:
             s (Simbolo): clone do Simbolo
         """
         s = Simbolo()
@@ -41,7 +41,7 @@ class Simbolo:
         Args:
             simbolo (Simbolo): Simbolo a ser comparado
 
-        Returns:
+        Retorno:
             igual (bool): flag para igualdade dos Simbolos
                 (default é False)
         """

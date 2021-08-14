@@ -18,7 +18,7 @@ class TransicaoD:
     def getDestino(self):
         """Obtem o Estado destino da TransicaoD
 
-        Returns:
+        Retorno:
             destino (Estado): Estado destino da transicao
         """
         return self.destino.clonar()
@@ -34,7 +34,7 @@ class TransicaoD:
     def getOrigem(self):
         """Obtem o Estado origem da TransicaoD
 
-        Returns:
+        Retorno:
             origem (Estado): Estado origem da transicao
         """
         if self.origem != None:
@@ -52,7 +52,7 @@ class TransicaoD:
     def getSimbolo(self):
         """Obtem o simbolo da TransicaoD
 
-        Returns:
+        Retorno:
             simbolo (Simbolo): Simbolo da transicao
         """
         return self.simbolo.clonar()
@@ -68,7 +68,7 @@ class TransicaoD:
     def clonar(self):
         """Cria e retorna uma copia do objeto TransicaoD
 
-        Returns:
+        Retorno:
             td (TransicaoD): clone da TransicaoD
         """
         td = TransicaoD(self.origem, self.destino, self.simbolo)
@@ -80,7 +80,7 @@ class TransicaoD:
         Args:
             transicao (TransicaoD): TransicaoD a ser comparada
 
-        Returns:
+        Retorno:
             igual (bool): flag para igualdade das transicoes
                 (default é False)
         """

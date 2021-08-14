@@ -11,7 +11,7 @@ class Estado:
     def getNome(self):
         """Obtem o nome do Estado
 
-        Returns:
+        Retorno:
             nome (str): String que representa o nome do Estado
         """
         return self.nome
@@ -27,7 +27,7 @@ class Estado:
     def clonar(self):
         """Cria e retorna uma copia do objeto Estado
 
-        Returns:
+        Retorno:
             e (Estado): clone do Estado
         """
         e = Estado()
@@ -40,7 +40,7 @@ class Estado:
         Args:
             estado (Estado): Estado a ser comparado 
 
-        Returns:
+        Retorno:
             igual (bool): flag para igualdade dos Estados
                 (default é False)
         """
