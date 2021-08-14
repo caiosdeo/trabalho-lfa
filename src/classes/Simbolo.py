@@ -7,7 +7,6 @@ class Simbolo:
             simbolo (str): String a ser definida como simbolo do alfabeto 
         """
         self.simbolo = simbolo
-        self.VAZIA = Simbolo("E")
 
     def getSimbolo(self):
         """Obtem o simbolo do alfabeto
@@ -51,3 +50,5 @@ class Simbolo:
     
     def __str__(self):
         return self.simbolo
+
+Simbolo.VAZIA = Simbolo('E')
