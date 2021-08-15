@@ -36,7 +36,7 @@ class ConjuntoSimbolos:
         elemento (Símbolo): Símbolo a ser inserido no conjunto de símbolos
     """
     def inclui(self,elemento):
-        self.elementos[elemento.getSimbolo()] = elemento.clonar()
+        self.elementos[elemento.__str__()] = elemento.clonar()
 
     """Verfica se um Simbolo pertence a um dado conjunto de símbolos
 
@@ -49,7 +49,7 @@ class ConjuntoSimbolos:
     """
     def pertence(self,elemento):
         if elemento is not None:
-            return True if elemento.getSimbolo() in self.elementos.keys() else False
+            return True if elemento.__str__() in self.elementos.keys() else False
         return False
 
     """Cria e retorna uma cópia do objeto ConjuntoSimbolos
@@ -153,5 +153,5 @@ class ConjuntoSimbolos:
     """
     def removerElemento(self,e):
         if e is not None:
-            del self.elementos[e.getSimbolo()]
+            del self.elementos[e.__str__()]
 	

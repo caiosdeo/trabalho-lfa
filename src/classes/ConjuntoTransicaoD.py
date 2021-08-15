@@ -28,7 +28,7 @@ class ConjuntoTransicaoD:
         elemento (TransicaoN): TransicaoN a ser inserida no ConjuntoTransicaoD
     """
     def inclui(self,elemento):
-        self.elementos[elemento] = elemento.clonar()
+        self.elementos[elemento.__str__()] = elemento.clonar()
 
     """Verfica se uma TransicaoN pertence a um dado ConjuntoTransicaoD
 
@@ -41,7 +41,7 @@ class ConjuntoTransicaoD:
     """
     def pertence(self,elemento):
         if elemento is not None:
-            return True if elemento in self.elementos.keys() else False
+            return True if elemento.__str__() in self.elementos.keys() else False
         return False
 
     """Realiza a união entre dois ConjuntoTransicaoD
@@ -145,5 +145,5 @@ class ConjuntoTransicaoD:
     """
     def removerElemento(self,e):
         if e is not None:
-            del self.elementos[e]
+            del self.elementos[e.__str__()]
 	

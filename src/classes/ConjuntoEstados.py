@@ -36,7 +36,7 @@ class ConjuntoEstados:
         elemento (Estado): Estado a ser inserido no conjunto de estados
     """
     def inclui(self,elemento):
-        self.elementos[elemento.getNome()] = elemento.clonar()
+        self.elementos[elemento.__str__()] = elemento.clonar()
 
     """Verfica se um Estado pertence a um dado conjunto de estados
 
@@ -49,7 +49,7 @@ class ConjuntoEstados:
     """
     def pertence(self,elemento):
         if elemento is not None:
-            return True if elemento.getNome() in self.elementos.keys() else False
+            return True if elemento.__str__() in self.elementos.keys() else False
         return False
 
     """Verfica se um Estado pertence a um dado conjunto de estados
@@ -65,7 +65,7 @@ class ConjuntoEstados:
     def retornaIgual(self,elemento):
         if elemento is not None:
             if self.pertence(elemento):
-                return self.elementos[elemento.getNome()]
+                return self.elementos[elemento.__str__()]
             return None
         return None
 
@@ -182,5 +182,5 @@ class ConjuntoEstados:
     """
     def removerElemento(self,e):
         if e is not None:
-            del self.elementos[e.getNome()]
+            del self.elementos[e.__str__()]
 	
