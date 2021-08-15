@@ -132,16 +132,16 @@ class AFD:
             estado (Estado): estado do automato finito deterministico
             palavra (String): palavra para impressão de L(M)
         """
-
+        
         if (self.estadosFinais.pertence(estado)):
-            print(palavra + "\n")
+            print(palavra)
 
         ct = self.getFuncaoPrograma()
         t = None
 
         if (not ct.vazio()):
-            if len(ct) > 0:
-                tAux = ct[1]
+            if len(ct.getElementos().values()) > 0:
+                tAux = next(iter(ct.getElementos().values())) # Primeiro elemento
                 ct.removerElemento(tAux)
                 t = tAux
 
@@ -150,9 +150,9 @@ class AFD:
             aux = palavra  
             if (t.getOrigem().igual(estado)):
                 #  Acrescenta o simbolo a palavra
-                aux = aux + t.getSimbolo()
+                aux = aux + str(t.getSimbolo())
                 #  Se a palavra for maior que 10
-                if (len(aux > 10)):
+                if (len(aux) > 10):
                     print("...\n")
                     break
                 else:
@@ -160,8 +160,8 @@ class AFD:
                     self.gera(t.getDestino(), aux)
             
             if (not ct.vazio()):
-                if len(ct) > 0:
-                    tAux = ct[1]
+                if len(ct.getElementos().values()) > 0:
+                    tAux = next(iter(ct.getElementos().values()))
                     ct.removerElemento(tAux)
                     t = tAux
             else:

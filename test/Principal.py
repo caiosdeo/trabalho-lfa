@@ -16,8 +16,8 @@ class Principal:
     def __init__(self):
         print("AFD Testes:")
         self.testeAFD()
-        print("AFN Testes:")
-        self.testeAFN()
+        # print("AFN Testes:")
+        # self.testeAFN()
 
     def testeAFD(self):
         estadoInicial = Estado()
@@ -31,9 +31,13 @@ class Principal:
         a.lerXML("./test/AFD.XML")
         
         print(a)
-        # a.gera(a.getEstadoInicial(), "") # TODO: Checar essa função
+        
+        print("L(AFD):")
+        a.gera(a.getEstadoInicial(), "")
+
         if (a.aceita(w)):
-            print(f"Aceitou {w}")
+            print(f"Aceitou palavra: {w}")
+
         print(f"Pe(q0, {w}): {a.pe(a.getEstadoInicial(), w)}")       
 
         a.exportarXML("testeAFDexp")
