@@ -179,8 +179,7 @@ class AFD:
         """
 
         fp = self.getFuncaoPrograma()
-
-        for it in fp.getElementos():
+        for it in fp.getElementos().values():
             if (it.getOrigem().igual(estado) and it.getSimbolo().igual(simbolo)):
                 return it.getDestino()
 
@@ -294,11 +293,11 @@ class AFD:
 
         # Funcao Programa
         funcaoPrograma = ET.SubElement(afd, 'funcaoPrograma')
-        for transicao in self.funcaoPrograma.getElementos():
+        for transicao in self.funcaoPrograma.getElementos().items():
             aux = ET.SubElement(funcaoPrograma, 'elemento')
-            aux.set('destino', str(transicao.getDestino()))
-            aux.set('origem', str(transicao.getOrigem()))
-            aux.set('simbolo', str(transicao.getSimbolo()))
+            aux.set('destino', str(transicao[1].getDestino()))
+            aux.set('origem', str(transicao[1].getOrigem()))
+            aux.set('simbolo', str(transicao[1].getSimbolo()))
 
         # Estado Inicial
         estadoInicial = ET.SubElement(afd, 'estadoInicial')
