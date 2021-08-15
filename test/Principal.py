@@ -16,8 +16,8 @@ class Principal:
     def __init__(self):
         print("AFD Testes:")
         self.testeAFD()
-        # print("AFN Testes:")
-        # self.testeAFN()
+        print("\n\nAFN Testes:")
+        self.testeAFN()
 
     def testeAFD(self):
         estadoInicial = Estado()
@@ -31,7 +31,7 @@ class Principal:
         a.lerXML("./test/AFD.XML")
         
         print(a)
-        
+
         print("L(AFD):")
         a.gera(a.getEstadoInicial(), "")
 
