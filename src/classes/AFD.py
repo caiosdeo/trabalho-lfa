@@ -1,5 +1,6 @@
 # Importando outras classes
 from src.classes.Simbolo import Simbolo
+from src.classes.Estado import Estado
 from src.classes.TransicaoD import TransicaoD
 
 # Biblioteca para trabalhar com XML
@@ -219,7 +220,7 @@ class AFD:
             pertence (bool): flag para pertencimento da palavra no AFD
                 (default é False)
         """
-
+        
         return self.estadosFinais.pertence(self.pe(self.estadoInicial, palavra))
 
     def lerXML(self, caminhoArquivo):
@@ -232,24 +233,26 @@ class AFD:
         root = ET.parse(caminhoArquivo).getroot()
 
         # Pegando o estado inicial
-        self.estadoInicial = str(root.find("estadoInicial").get('valor'))
+        self.estadoInicial = Estado(str(root.find("estadoInicial").get('valor')))
 
         # Resgatando o restante das informações
         for parametro in root:
 
             if(parametro.tag == "simbolos"):
                 for elemento in parametro:
-                    self.simbolos.inclui(str(elemento.get('valor')))    
+                    simbolo = Simbolo(str(elemento.get('valor')))
+                    self.simbolos.inclui(simbolo)    
 
             if(parametro.tag == "estados"):
                 for elemento in parametro:
-                    self.estados.inclui(str(elemento.get('valor'))) 
+                    estado = Estado(str(elemento.get('valor')))
+                    self.estados.inclui(estado) 
 
             if(parametro.tag == "funcaoPrograma"):
                 for elemento in parametro:
-                    origem = str(elemento.get('origem'))
-                    destino = str(elemento.get('destino'))
-                    simbolo = str(elemento.get('simbolo'))
+                    origem = Estado(str(elemento.get('origem')))
+                    destino = Estado(str(elemento.get('destino')))
+                    simbolo = Simbolo(str(elemento.get('simbolo')))
                     transicao = TransicaoD()
                     transicao.setOrigem(origem)
                     transicao.setDestino(destino)
@@ -258,7 +261,8 @@ class AFD:
 
             if(parametro.tag == "estadosFinais"):
                 for elemento in parametro:
-                    self.estadosFinais.inclui(str(elemento.get('valor')))
+                    estado = Estado(str(elemento.get('valor')))
+                    self.estadosFinais.inclui(estado)
 
     def exportarXML(self, nomeArquivo):
         """Cria arquivo XML do AFD com nome passado por parametro
@@ -272,35 +276,35 @@ class AFD:
 
         # Simbolos
         simbolos = ET.SubElement(afd, 'simbolos')
-        for simbolo in self.simbolos:
+        for simbolo in self.simbolos.getElementos():
             aux = ET.SubElement(simbolos, 'elemento')
-            aux.set('valor', simbolo)
+            aux.set('valor', str(simbolo))
 
         # Estados
         estados = ET.SubElement(afd, 'estados')
-        for estado in self.estados:
+        for estado in self.estados.getElementos():
             aux = ET.SubElement(estados, 'elemento')
-            aux.set('valor', estado)
+            aux.set('valor', str(estado))
 
         # Estados Finais
         estadosFinais = ET.SubElement(afd, 'estadosFinais')
-        for estadoFinal in self.estadosFinais:
+        for estadoFinal in self.estadosFinais.getElementos():
             aux = ET.SubElement(estadosFinais, 'elemento')
-            aux.set('valor', estadoFinal)
+            aux.set('valor', str(estadoFinal))
 
         # Funcao Programa
         funcaoPrograma = ET.SubElement(afd, 'funcaoPrograma')
-        for transicao in self.funcaoPrograma:
+        for transicao in self.funcaoPrograma.getElementos():
             aux = ET.SubElement(funcaoPrograma, 'elemento')
-            aux.set('destino', transicao.getDestino())
-            aux.set('origem', transicao.getOrigem())
-            aux.set('simbolo', transicao.getSimbolo())
+            aux.set('destino', str(transicao.getDestino()))
+            aux.set('origem', str(transicao.getOrigem()))
+            aux.set('simbolo', str(transicao.getSimbolo()))
 
         # Estado Inicial
         estadoInicial = ET.SubElement(afd, 'estadoInicial')
-        estadoInicial.set('valor', self.estadoInicial)
+        estadoInicial.set('valor', str(self.estadoInicial))
 
         # cria o arquivo XML
-        afdTree = ET.tostring(afd)
+        afdTree = ET.tostring(afd).decode()
         arquivo = open(nomeArquivo + ".xml", "w")
         arquivo.write(afdTree)

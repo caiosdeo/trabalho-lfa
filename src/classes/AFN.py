@@ -5,6 +5,7 @@ from src.classes.TransicaoD import TransicaoD
 from src.classes.TransicaoN import TransicaoN
 from src.classes.ConjuntoEstados import ConjuntoEstados
 from src.classes.ConjuntoTransicaoD import ConjuntoTransicaoD
+from src.classes.ConjuntoTransicaoN import ConjuntoTransicaoN
 from src.classes.ConjuntoConjuntoEstados import ConjuntoConjuntoEstados
 from src.classes.AFD import AFD
 
@@ -193,8 +194,6 @@ class AFN:
 
         return False
 
-
-    # TODO: método toAFD
     def toAFD(self):
         """Converte um AFN em um AFD
 
@@ -206,7 +205,7 @@ class AFN:
         novoConjuntoSimbolos = self.getSimbolos().clonar()
         novoConjuntoEstados = ConjuntoEstados()
         novoConjuntoTransicaoD = ConjuntoTransicaoD()
-        novoEstadoInicial = Estado("<" + self.getEstadoInicial() + ">")
+        novoEstadoInicial = Estado("<" + str(self.estadoInicial) + ">")
         novoConjuntoEstadosFinais = ConjuntoEstados()
         novoEstado = Estado()
         novaTransicaoD = TransicaoD()
@@ -219,7 +218,6 @@ class AFN:
         conjuntoEstadosAtual = ConjuntoEstados()
         estadoAtual = self.getEstadoInicial().clonar()
 
-
         # Parametro temporario necessario para criacao do novo Estado
         ceTemp = ConjuntoEstados()
 
@@ -229,12 +227,12 @@ class AFN:
 
         # Inclusão no conjunto de estados finais
         if (atualConjuntoEstadosFinais.pertence(estadoAtual)):
-                novoConjuntoEstadosFinais.inclui(novoEstadoInicial)
+            novoConjuntoEstadosFinais.inclui(novoEstadoInicial)
 
-		novoConjuntoEstados.inclui(novoEstadoInicial)
+        novoConjuntoEstados.inclui(novoEstadoInicial)
 
         # Iteracao sobre os conjuntos de estados que serao analizados
-        for it in cceAtual:
+        for it in cceAtual.getElementos():
 
             conjuntoEstadosAtual = it
 
@@ -246,27 +244,30 @@ class AFN:
             estadoFinal = False
 
             # Iteracao sobre o conjunto de simbolos do Alfabeto
-            for itSi in novoConjuntoSimbolos:
+            for itSi in novoConjuntoSimbolos.getElementos():
 
                 # Iteracao sobre os Estados que formam o estado atual
                 ceTemp = ConjuntoEstados()
 
-                for itCe in conjuntoEstadosAtual:
+                for itCe in conjuntoEstadosAtual.getElementos():
                     # Novo estado sera a uniao de todos o retorno da funcao programa para um determinado simbolo
-                    ceTemp = ceTemp.uniao(self.p(itCe, itSi))
+                    estado = Estado(itCe)
+                    simbolo = Simbolo(itSi)
+                    ceTemp = ceTemp.uniao(self.p(estado, simbolo))
 
                 # Verifica se a uniao esta vazia
                 if not ceTemp.vazio():
                     # Nome do novo estado
-                    novoNome = ceTemp
+                    novoNome = str(ceTemp)
                     # Retira as {} presentes no inicio e final do nome
                     novoNome = novoNome[1:-1]
                     # insere < > 
                     novoEstado = Estado("<" + novoNome + ">")
 
                     # Verifica se o estado vai pertencer ao Conjunto de estados finais
-                    for itEFinal in ceTemp:
-                        if atualConjuntoEstadosFinais.pertence(itEFinal):
+                    for itEFinal in ceTemp.getElementos():
+                        estado = Estado(itEFinal)
+                        if atualConjuntoEstadosFinais.pertence(estado):
                             estadoFinal = True
 
                     # Se no novo Conjunto de Estados nao houver nenhum estado igual ao novo
@@ -287,7 +288,7 @@ class AFN:
 						# Busca origem ja existente no novo Conjunto de Estados
                         novaOrigem = novoConjuntoEstados.retornaIgual(Estado(nomeOrigem))
                         novaTD.setOrigem(novaOrigem)
-                        novaTD.setSimbolo(itSi)
+                        novaTD.setSimbolo(simbolo)
                         novaTD.setDestino(novoEstado)
 
                         novoConjuntoTransicaoD.inclui(novaTD.clonar())
@@ -302,7 +303,7 @@ class AFN:
 
                         novaOrigem = novoConjuntoEstados.retornaIgual(Estado(nomeOrigem))
                         novaTD.setOrigem(novaOrigem)
-                        novaTD.setSimbolo(itSi)
+                        novaTD.setSimbolo(simbolo)
                         novaTD.setDestino(novoEstado)
 
                         novoConjuntoTransicaoD.inclui(novaTD.clonar())
@@ -327,30 +328,30 @@ class AFN:
         root = ET.parse(caminhoArquivo).getroot()
 
         # Pegando o estado inicial
-        self.estadoInicial = str(root.find("estadoInicial").get('valor'))
+        self.estadoInicial = Estado(str(root.find("estadoInicial").get('valor')))
 
         # Resgatando o restante das informações
         for parametro in root:
 
             if(parametro.tag == "simbolos"):
                 for elemento in parametro:
-                    self.simbolos.inclui(str(elemento.get('valor')))    
+                    self.simbolos.inclui(Simbolo(str(elemento.get('valor'))))    
 
             if(parametro.tag == "estados"):
                 for elemento in parametro:
-                    self.estados.inclui(str(elemento.get('valor'))) 
+                    self.estados.inclui(Estado(str(elemento.get('valor')))) 
 
             if(parametro.tag == "funcaoPrograma"):
                 for elemento in parametro:
-                    origem = str(elemento.get('origem'))
-                    destino = str(elemento.get('destino'))
-                    simbolo = str(elemento.get('simbolo'))
+                    origem = Estado(str(elemento.get('origem')))
+                    destino = Estado(str(elemento.get('destino')))
+                    simbolo = Simbolo(str(elemento.get('simbolo')))
 
                     transicao = TransicaoN()
                     transicao.setOrigem(origem)
                     transicao.setSimbolo(simbolo)
 
-                    for it in self.funcaoPrograma:
+                    for it in self.funcaoPrograma.getElementos():
                         if it.getOrigem().igual(transicao.getOrigem()) and it.getSimbolo().igual(transicao.getSimbolo()):
                             transicao.setDestino(it.getDestino())
                             self.funcaoPrograma.removerElemento(it)
@@ -364,7 +365,7 @@ class AFN:
 
             if(parametro.tag == "estadosFinais"):
                 for elemento in parametro:
-                    self.estadosFinais.inclui(str(elemento.get('valor')))
+                    self.estadosFinais.inclui(Estado(str(elemento.get('valor'))))
 
     def exportarXML(self, nomeArquivo):
         """Cria arquivo XML do AFN com nome passado por parametro
@@ -378,40 +379,37 @@ class AFN:
 
         # Simbolos
         simbolos = ET.SubElement(afn, 'simbolos')
-        for simbolo in self.simbolos:
+        for simbolo in self.simbolos.getElementos():
             aux = ET.SubElement(simbolos, 'elemento')
-            aux.set('valor', simbolo)
+            aux.set('valor', str(simbolo))
 
         # Estados
         estados = ET.SubElement(afn, 'estados')
-        for estado in self.estados:
+        for estado in self.estados.getElementos():
             aux = ET.SubElement(estados, 'elemento')
-            aux.set('valor', estado)
+            aux.set('valor', str(estado))
 
         # Estados Finais
         estadosFinais = ET.SubElement(afn, 'estadosFinais')
-        for estadoFinal in self.estadosFinais:
+        for estadoFinal in self.estadosFinais.getElementos():
             aux = ET.SubElement(estadosFinais, 'elemento')
-            aux.set('valor', estadoFinal)
+            aux.set('valor', str(estadoFinal))
 
         # Funcao Programa
         funcaoPrograma = ET.SubElement(afn, 'funcaoPrograma')
-        for transicao in self.funcaoPrograma:
+        for transicao in self.funcaoPrograma.getElementos():
             estadosDestino = transicao.getDestino()
-            for estado in estadosDestino:
+            for estado in estadosDestino.getElementos():
                 aux = ET.SubElement(funcaoPrograma, 'elemento')
-                aux.set('destino', estado)
-                aux.set('origem', transicao.getOrigem())
-                aux.set('simbolo', transicao.getSimbolo())
+                aux.set('destino', str(estado))
+                aux.set('origem', str(transicao.getOrigem()))
+                aux.set('simbolo', str(transicao.getSimbolo()))
 
         # Estado Inicial
         estadoInicial = ET.SubElement(afn, 'estadoInicial')
-        estadoInicial.set('valor', self.estadoInicial)
+        estadoInicial.set('valor', str(self.estadoInicial))
 
         # cria o arquivo XML
-        afnTree = ET.tostring(afn)
+        afnTree = ET.tostring(afn).decode()
         arquivo = open(nomeArquivo + ".xml", "w")
         arquivo.write(afnTree)
-
-    # TODO: função lerXML || pesquisar "python xml parser e python render xml as image"
-    # TODO: função toXML
