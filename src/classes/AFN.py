@@ -143,12 +143,11 @@ class AFN:
         """
 
         fp = self.getFuncaoPrograma()
-
-        for it in fp.getElementos():
+        for it in fp.getElementos().values():
             if (it.getOrigem().igual(estado) and it.getSimbolo().igual(simbolo)):
                 return it.getDestino()
 
-        return None
+        return ConjuntoEstados()
 
     def pe(self, estados, palavra):
         """Função Programa Estendida
@@ -231,29 +230,28 @@ class AFN:
 
         novoConjuntoEstados.inclui(novoEstadoInicial)
 
-        # Iteracao sobre os conjuntos de estados que serao analizados
-        for it in cceAtual.getElementos():
+        it = next(iter(cceAtual.getElementos().values())) # Primeiro elemento
 
+        # Iteracao sobre os conjuntos de estados que serao analizados
+        while not cceAtual.vazio():
+            
             conjuntoEstadosAtual = it
 
             # Remove o elemento do Conjunto de analisaveis pois este sera analizado
             cceAtual.removerElemento(conjuntoEstadosAtual)
-            # Renova o parametro temporario
-            ceTemp = ConjuntoEstados()
+
             # Parametro para verificar se o estado vai pertencer ao conjunto de estados finais
             estadoFinal = False
 
             # Iteracao sobre o conjunto de simbolos do Alfabeto
             for itSi in novoConjuntoSimbolos.getElementos():
+                simbolo = Simbolo(itSi)
 
-                # Iteracao sobre os Estados que formam o estado atual
-                ceTemp = ConjuntoEstados()
-
-                for itCe in conjuntoEstadosAtual.getElementos():
+                for itCe in conjuntoEstadosAtual.getElementos().keys():
                     # Novo estado sera a uniao de todos o retorno da funcao programa para um determinado simbolo
-                    estado = Estado(itCe)
-                    simbolo = Simbolo(itSi)
-                    ceTemp = ceTemp.uniao(self.p(estado, simbolo))
+                    estadoAtual = Estado(itCe)
+                    ceTemp = ceTemp.uniao(self.p(estadoAtual, simbolo))
+                    # cceAtual.inclui(ceTemp)
 
                 # Verifica se a uniao esta vazia
                 if not ceTemp.vazio():
@@ -282,7 +280,7 @@ class AFN:
 						
                         # Cria nova transicaoD
                         novaTD = TransicaoD()
-                        nomeOrigem = conjuntoEstadosAtual
+                        nomeOrigem = str(conjuntoEstadosAtual)
                         nomeOrigem = "<" + nomeOrigem[1:-1] + ">"
 
 						# Busca origem ja existente no novo Conjunto de Estados
@@ -298,7 +296,7 @@ class AFN:
                     # Caso ja exista estado igual no novo conjunto de estados cria somente nova transicao
                     else:
                         novaTD = TransicaoD()
-                        nomeOrigem = conjuntoEstadosAtual
+                        nomeOrigem = str(conjuntoEstadosAtual)
                         nomeOrigem = "<" + nomeOrigem[1:-1] + ">"
 
                         novaOrigem = novoConjuntoEstados.retornaIgual(Estado(nomeOrigem))
@@ -307,6 +305,10 @@ class AFN:
                         novaTD.setDestino(novoEstado)
 
                         novoConjuntoTransicaoD.inclui(novaTD.clonar())
+                ceTemp = ConjuntoEstados()
+
+            if not cceAtual.vazio():
+                it = next(iter(cceAtual.getElementos().values()))
 
         novoAFD = AFD(
             novoConjuntoSimbolos,
@@ -351,16 +353,16 @@ class AFN:
                     transicao.setOrigem(origem)
                     transicao.setSimbolo(simbolo)
 
-                    for it in self.funcaoPrograma.getElementos():
+                    for it in self.funcaoPrograma.getElementos().values():
                         if it.getOrigem().igual(transicao.getOrigem()) and it.getSimbolo().igual(transicao.getSimbolo()):
                             transicao.setDestino(it.getDestino())
                             self.funcaoPrograma.removerElemento(it)
                             break
                     
                     conjuntoEstados = transicao.getDestino()
-                    conjuntoEstados.inclui(Estado(destino))
+                    conjuntoEstados.inclui(destino)
                     transicao.setDestino(conjuntoEstados)
-                    
+
                     self.funcaoPrograma.inclui(transicao)   
 
             if(parametro.tag == "estadosFinais"):
@@ -397,7 +399,7 @@ class AFN:
 
         # Funcao Programa
         funcaoPrograma = ET.SubElement(afn, 'funcaoPrograma')
-        for transicao in self.funcaoPrograma.getElementos():
+        for transicao in self.funcaoPrograma.getElementos().values():
             estadosDestino = transicao.getDestino()
             for estado in estadosDestino.getElementos():
                 aux = ET.SubElement(funcaoPrograma, 'elemento')

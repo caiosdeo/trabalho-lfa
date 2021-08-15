@@ -183,7 +183,7 @@ class AFD:
             if (it.getOrigem().igual(estado) and it.getSimbolo().igual(simbolo)):
                 return it.getDestino()
 
-        return None
+        return Estado()
 
     def pe(self, estado, palavra):
         """Função Programa Estendida

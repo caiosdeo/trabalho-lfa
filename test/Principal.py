@@ -30,7 +30,7 @@ class Principal:
         
         a.lerXML("./test/AFD.XML")
         
-        # print(a)
+        print(a)
         # a.gera(a.getEstadoInicial(), "") # TODO: Checar essa função
         if (a.aceita(w)):
             print(f"Aceitou {w}")
@@ -47,8 +47,8 @@ class Principal:
         a = AFN(simbolos, estados, funcaoPrograma, estadoInicial, estadosFinais)
 
         a.lerXML("./test/AFN.XML")
-        # print(a)
-        # print(a.toAFD())
+        print(f"AFN: {a}")
+        print(F"AFD: {a.toAFD()}")
         a.exportarXML("testeAFNexp")
 
 if __name__ == '__main__':
